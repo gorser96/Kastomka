@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 25f; // Скорость движения
     private Rigidbody rb; // Ссылка на Rigidbody компонента
     private Vector2 moveInput; // Вектор для хранения ввода
+    private Animator animator;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>(); // Получаем компонент Rigidbody
         rb.freezeRotation = true;  // Останавливаем вращение объекта
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -36,5 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Используем Rigidbody для движения с учетом физики
         rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
+        animator.SetBool("isWalk", moveDirection.magnitude > 0.1f);
     }
 }
