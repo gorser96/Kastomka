@@ -46,6 +46,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Используем Rigidbody для движения с учетом физики
         rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
-        animator.SetBool("isWalk", moveDirection.magnitude > 0.1f);
+        
+        var attackVar = animator.GetBool("attack");
+        if (moveDirection.magnitude > 0.1f)
+        {
+            if (attackVar)
+            {
+                animator.SetFloat("walkAndAttack", 0.5f);
+            }
+            else
+            {
+                animator.SetFloat("walkAndAttack", 0.1f);
+            }
+        }
+        else
+        {
+            animator.SetFloat("walkAndAttack", attackVar ? 1f : 0f);
+        }
     }
 }
