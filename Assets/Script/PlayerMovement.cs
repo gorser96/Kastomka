@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 25f; // Скорость движения
+    public float rotationSpeed = 10f;
     private Rigidbody rb; // Ссылка на Rigidbody компонента
     private Vector2 moveInput; // Вектор для хранения ввода
     private Animator animator;
@@ -35,6 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Направление движения по двум осям
         Vector3 moveDirection = new Vector3(horizontal, 0, vertical).normalized;
+        if (moveDirection.magnitude > 0.1f)
+        {
+            // Рассчитываем поворот, чтобы персонаж смотрел в сторону движения
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            // Плавный поворот персонажа с использованием Lerp
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
         // Используем Rigidbody для движения с учетом физики
         rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);

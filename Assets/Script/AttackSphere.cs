@@ -41,7 +41,7 @@ public class AttackSphere : MonoBehaviour
         }
         else
         {
-            // Вычисляем движение сферы, если цель не активна (по-прежнему двигаемся на максимальное расстояние)
+            // Если цель не найдена или она слишком далеко, продолжаем движение в максимальном направлении
             float step = speed * Time.deltaTime;
             transform.Translate(Vector3.forward * step);
         }
