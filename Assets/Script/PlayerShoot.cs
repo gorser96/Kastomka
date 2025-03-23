@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public GameObject projectilePrefab; // Префаб сферы (проекта)
+    public GameObject projectilePrefab1; // Префаб сферы (проекта)
     public Transform firePoint; // Точка, из которой будет вылетать сфера
     public float shootCooldown = 0.5f; // Время между выстрелами (в секундах)
     private float lastShootTime = 0f;
