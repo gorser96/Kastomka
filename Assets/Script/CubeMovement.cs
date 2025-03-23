@@ -30,7 +30,8 @@ public class CubeMovement : MonoBehaviour
 
             // Перемещаем куб в сторону игрока
             transform.position = Vector3.MoveTowards(transform.position, player.position , moveSpeed * Time.deltaTime);
-            animator.SetBool("isWalk", true);
+
+            animator.SetFloat("Speed", transform.position.normalized.magnitude);
         }
     }
 }

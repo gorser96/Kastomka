@@ -20,14 +20,14 @@ public class AttackSphere : MonoBehaviour
         startPosition = transform.position;
 
         // Находим объект с тегом "Mob" (Cube)
-         GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
+        GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
 
         // Если объекты с тегом "Mob" найдены, находим ближайший
         if (mobs.Length > 0)
         {
             target = FindClosestTarget(mobs);
         }
-        
+
     }
 
     void Update()
@@ -75,7 +75,10 @@ public class AttackSphere : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        // Удаляем сферу при столкновении с любым объектом
-        Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Mob"))
+        {
+            // Удаляем сферу при столкновении с мобом
+            Destroy(gameObject);
+        }
     }
 }
